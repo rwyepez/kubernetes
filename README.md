@@ -8,16 +8,17 @@
 | `kubectl --help`                             | List all kubectl commands.                                        |
 | `kubectl config get-contexts`                | Obtiene los contextos cargados en /Users/YourUser/.kube/config.   |
 | `kubectl get ns`                             | Lists all namespaces in the cluster.                              |
+| `kubectl create ns namespace_name`           | Create a new namespace.                                           |
 | `kubectl get all`                            | Lists all resources.                                              |
 | `-o wide`                                    | Include at the end of the command to see more info                |
 | `-o yaml`                                    | Include at the end of the command to see yaml configuration       |
+| `-A yaml`                                    | Include at the end of the command to see all resources with namespace info           |
 | `-n namespace_name`                          | Include to search resources by namespace.                         |
 
 ### Pods
 | Command                                      | Description                                                       |
 |----------------------------------------------|-------------------------------------------------------------------|
 | `kubectl get pods`                           | Lists all pods in the current namespace.                          |
-| `kubectl get pods -A`                        | Lists all pods including namespace information.                   |
 | `kubectl get pod pod_name --show-labels`     | Lists a pod including label information.                          |
 | `kubectl get pod pod_name -o yaml`           | Retrieves detailed information about a pod in YAML format.        |
 | `kubectl describe pod pod_name`              | Displays detailed information about a specific pod.               |
@@ -32,14 +33,20 @@
 | `kubectl delete pods --field-selector status.phase=Failed` | Deletes pods that are in a failed status.           |
 
 ### Deployments
-| Command                                      | Description                                                       |
-|----------------------------------------------|-------------------------------------------------------------------|
-| `kubectl apply -f file.yaml`                 | Applies the configurations defined in the YAML file.              |
-| `kubectl delete -f file.yaml`                | Deletes the resources defined in the YAML file.                   |
-| `kubectl get deployments`                    | Lists all deployments in the current namespace.                   |
-| `kubectl get sts`                            | Lists all stateful sets in the current namespace.                 |
-| `kubectl delete deployment deployment_name`  | Deletes a specific deployment.                                    |
-
+| Command                                                      | Description                                                       |
+|--------------------------------------------------------------|-------------------------------------------------------------------|
+| `kubectl apply -f file.yaml`                                 | Applies the configurations defined in the YAML file.              |
+| `kubectl delete -f file.yaml`                                | Deletes the resources defined in the YAML file.                   |
+| `kubectl get deployments`                                    | Lists all deployments in the current namespace.                   |
+| `kubectl get sts`                                            | Lists all stateful sets in the current namespace.                 |
+| `kubectl delete deployment deployment_name`                  | Deletes a specific deployment.                                    |
+| `kubectl rollout restart deployment deployment_name`         | Restarts a specific deployment.                                   |
+| `kubectl edit deployment deployment_name`                    | Live or Hot editing a specific deployment.                        |
+| `kubectl rollout history deployment deployment_name`         | Shows the rollout history of a specific deployment.               |
+| `kubectl set image deployment deployment_name container_name=new_image` | Updates the image of a specific container in a deployment. |
+| `kubectl set image deployment deployment_name container_name=new_image --record=true` | Updates the image and records the change for a specific container in a deployment. |
+| `kubectl rollout undo deployment deployment_name`            | Reverts a deployment to a previous revision.                      |
+| `kubectl rollout undo deployment deployment_name --to-revision=revision_id` | Reverts a deployment to a specific revision, see revisions in history command.  |
 
 ### Services
 | Command                                      | Description                                                       |
@@ -121,3 +128,50 @@ livenessProbe:
 These configurations ensure that the container has the necessary resources to function correctly and that Kubernetes can continuously monitor its health and availability.
 
 
+## Resource Kinds
+
+1. **Pod**
+    - **Description:** The basic unit of execution in Kubernetes, encapsulating one or more containers, storage, network, and configuration options.
+    - **Use Case:** Suitable for running a single instance of an application or microservice.
+
+2. **Deployment**
+    - **Description:** Manages a set of identical pods, ensuring that the specified number of pods are running at any time.
+    - **Use Case:** Ideal for stateless applications, where the state is not saved locally on the pods but rather in external storage.
+    - [Example](./04-deployment.yaml)
+
+3. **DaemonSet**
+    - **Description:** Ensures that a copy of a pod is running on all (or specific) nodes in the cluster.
+    - **Use Case:** Useful for background tasks such as log collection, monitoring, or other node-specific tasks.
+    - [Example](./03-daemonset.yaml)
+
+4. **StatefulSet**
+    - **Description:** Manages stateful applications, providing unique network identities and stable, persistent storage for each pod.
+    - **Use Case:** Suitable for applications that require stable identities and persistent storage, such as databases.
+
+5. **Job**
+    - **Description:** Creates one or more pods and ensures that a specified number of them successfully terminate.
+    - **Use Case:** Suitable for batch processing tasks, such as data processing jobs.
+
+6. **CronJob**
+    - **Description:** Manages jobs that are run on a schedule, similar to cron jobs in Unix-like systems.
+    - **Use Case:** Ideal for periodic tasks like backups, report generation, or other scheduled tasks.
+
+7. **ReplicaSet**
+    - **Description:** Ensures a specified number of pod replicas are running at any given time.
+    - **Use Case:** Often used by Deployments as a means to maintain a stable set of replica pods.
+
+8. **ConfigMap**
+    - **Description:** Provides a way to inject configuration data into pods.
+    - **Use Case:** Useful for decoupling environment-specific configurations from the application code.
+
+9. **Secret**
+    - **Description:** Similar to ConfigMaps but designed to store sensitive information, such as passwords, tokens, and keys.
+    - **Use Case:** Ensures sensitive information is stored securely and injected into pods as needed.
+
+10. **PersistentVolume (PV)**
+    - **Description:** Represents a piece of storage in the cluster that has been provisioned by an administrator or dynamically provisioned.
+    - **Use Case:** Provides storage resources for applications that need persistent storage.
+
+11. **PersistentVolumeClaim (PVC)**
+    - **Description:** A request for storage by a user, specifying size and access modes.
+    - **Use Case:** Used to bind to a PersistentVolume and mount it to a pod.
