@@ -1,24 +1,16 @@
 # kubernetes
 
-kubectl --help                  List all kubectl commands
-kubectl config get-contexts     Obtiene los contextos cargados en /Users/YourUser/.kube/config
+| Command                                      | Description                                                       |
+|----------------------------------------------|-------------------------------------------------------------------|
+| `kubectl --help`                             | List all kubectl commands                                         |
+| `kubectl config get-contexts`                | Obtiene los contextos cargados en /Users/YourUser/.kube/config    |
 
-
-kubectl get ns
-kubectl get pods
-
-kubectl get pod pod_name -o yaml
-kubectl describe pod pod_name
-kubectl delete pod pod_name
-kubectl exec -it pod_name -- sh
-
-kubectl apply -f file.yaml
-kubectl delete -f file.yaml
 
 | Command                                      | Description                                                       |
 |----------------------------------------------|-------------------------------------------------------------------|
 | `kubectl get ns`                             | Lists all namespaces in the cluster.                              |
 | `kubectl get pods`                           | Lists all pods in the current namespace.                          |
+
 
 | Command                                      | Description                                                       |
 |----------------------------------------------|-------------------------------------------------------------------|
@@ -26,6 +18,7 @@ kubectl delete -f file.yaml
 | `kubectl describe pod pod_name`              | Displays detailed information about a specific pod.               |
 | `kubectl delete pod pod_name`                | Deletes a specific pod.                                           |
 | `kubectl exec -it pod_name -- sh`            | Opens an interactive shell session inside a running pod.          |
+
 
 | Command                                      | Description                                                       |
 |----------------------------------------------|-------------------------------------------------------------------|
