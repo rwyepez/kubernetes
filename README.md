@@ -26,7 +26,7 @@
 | `kubectl describe pod pod_name`              | Displays detailed information about a specific pod.               |
 | `kubectl delete pod pod_name`                | Deletes a specific pod.                                           |
 | `kubectl exec -it pod_name -- sh`            | Opens an interactive shell session inside a running pod.          |
-| `kubectl exec -it pod_name -- bash`                                                                              |
+| `kubectl exec -it pod_name -- bash`          |                                                                   |
 
 
 | Command                                      | Description                                                       |
