@@ -1,23 +1,32 @@
 # kubernetes
 
+## Commands
+
+### General
 | Command                                      | Description                                                       |
 |----------------------------------------------|-------------------------------------------------------------------|
-| `kubectl --help`                             | List all kubectl commands                                         |
-| `kubectl config get-contexts`                | Obtiene los contextos cargados en /Users/YourUser/.kube/config    |
+| `kubectl --help`                             | List all kubectl commands.                                        |
+| `kubectl config get-contexts`                | Obtiene los contextos cargados en /Users/YourUser/.kube/config.   |
 
 
 | Command                                      | Description                                                       |
 |----------------------------------------------|-------------------------------------------------------------------|
 | `kubectl get ns`                             | Lists all namespaces in the cluster.                              |
-| `kubectl get pods`                           | Lists all pods in the current namespace.                          |
+| `kubectl get all`                            | Lists all resources.                                              |
+| `-o wide`                                    | Include at the end of the command to see more info                |
+| `-o yaml`                                    | Include at the end of the command to see yaml configuration       |
+| `-n namespace_name`                          | Include to search resources by namespace.                         |
 
-
+### Pods
 | Command                                      | Description                                                       |
 |----------------------------------------------|-------------------------------------------------------------------|
+| `kubectl get pods`                           | Lists all pods in the current namespace.                          |
+| `kubectl get pods -A`                        | Lists all pods include Namespace info  .                          |
 | `kubectl get pod pod_name -o yaml`           | Retrieves detailed information about a pod in YAML format.        |
 | `kubectl describe pod pod_name`              | Displays detailed information about a specific pod.               |
 | `kubectl delete pod pod_name`                | Deletes a specific pod.                                           |
 | `kubectl exec -it pod_name -- sh`            | Opens an interactive shell session inside a running pod.          |
+| `kubectl exec -it pod_name -- bash`                                                                              |
 
 
 | Command                                      | Description                                                       |
@@ -27,11 +36,11 @@
 
 
 
-### Resource and Probe Configuration in Kubernetes
+## Resource and Probe Configuration in Kubernetes
 
 This section details how to configure resources and readiness and liveness probes for a container in a Kubernetes manifest. Example file 02-pod.yaml
 
-#### Resources
+### Resources
 
 ```yaml
 resources:
@@ -54,7 +63,7 @@ resources:
 
 - **1000m (millicores)** is equivalent to **1 core**.
 
-#### Readiness Probe
+### Readiness Probe
 
 ```yaml
 readinessProbe:
@@ -69,7 +78,7 @@ readinessProbe:
 - **initialDelaySeconds**: Waits `5` seconds before performing the first check.
 - **periodSeconds**: Performs the check every `10` seconds.
 
-#### Liveness Probe
+### Liveness Probe
 
 ```yaml
 livenessProbe:
