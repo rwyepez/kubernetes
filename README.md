@@ -21,37 +21,45 @@
 | `kubectl get pod pod_name --show-labels`     | Lists a pod including label information.                          |
 | `kubectl get pod pod_name -o yaml`           | Retrieves detailed information about a pod in YAML format.        |
 | `kubectl describe pod pod_name`              | Displays detailed information about a specific pod.               |
-| `kubectl delete pod pod_name`                | Deletes a specific pod.                                           |
-| `kubectl delete pods --field-selector status.phase=Failed` | Deletes pods that are in a failed status.           |
+| `kubectl logs pod_name`                      | Retrieves logs from a specific pod.                               |
+| `kubectl logs pod_name --tail=20`            | Retrieves the last 20 lines of logs from a specific pod.          |
+| `kubectl logs pod_name --since=1h`           | Retrieves logs from a specific pod from the last hour.            |
+| `kubectl logs pod_name -f`                   | Follows the log output from a specific pod in real time.          |
 | `kubectl exec -it pod_name -- sh`            | Opens an interactive shell session inside a running pod.          |
 | `kubectl exec -it pod_name -- bash`          | Opens an interactive bash session inside a running pod.           |
+| `kubectl top pod pod_name`                   | Show CPU and memory metrics. It's necessary install API metrics   |
+| `kubectl delete pod pod_name`                | Deletes a specific pod.                                           |
+| `kubectl delete pods --field-selector status.phase=Failed` | Deletes pods that are in a failed status.           |
 
 ### Deployments
 | Command                                      | Description                                                       |
 |----------------------------------------------|-------------------------------------------------------------------|
 | `kubectl apply -f file.yaml`                 | Applies the configurations defined in the YAML file.              |
 | `kubectl delete -f file.yaml`                | Deletes the resources defined in the YAML file.                   |
+| `kubectl get deployments`                    | Lists all deployments in the current namespace.                   |
+| `kubectl get sts`                            | Lists all stateful sets in the current namespace.                 |
+| `kubectl delete deployment deployment_name`  | Deletes a specific deployment.                                    |
 
-| `kubectl get deployments`                | Deletes the resources defined in the YAML file.                   |
-| `kubectl get sts`                | Deletes the resources defined in the YAML file.                   |
-| `kubectl delete deployment deployment_name`                | Deletes the resources defined in the YAML file.                   |
 
 ### Services
 | Command                                      | Description                                                       |
 |----------------------------------------------|-------------------------------------------------------------------|
-| `kubectl get svc`                 | Applies the configurations defined in the YAML file.              |
-| `kubectl describe svc service_name`                 | Applies the configurations defined in the YAML file.              |
+| `kubectl get svc`                            | Lists all services in the current namespace.                      |
+| `kubectl describe svc service_name`          | Displays detailed information about a specific service.           |
+
 
 ### Nodes
 | Command                                      | Description                                                       |
 |----------------------------------------------|-------------------------------------------------------------------|
-| `kubectl get nodes`                 | Applies the configurations defined in the YAML file.              |
-| `kubectl describe node node_name`                 | Applies the configurations defined in the YAML file.              |
-| `kubectl get node node_name -o json`                 | Applies the configurations defined in the YAML file.              |
-| `kubectl delete node node_name`                 | Applies the configurations defined in the YAML file.              |
-| `kubectl drain`                 | Applies the configurations defined in the YAML file.              |
-| `kubectl cordon`                 | Applies the configurations defined in the YAML file.              |
-| `kubectl uncordon`                 | Applies the configurations defined in the YAML file.              |
+| `kubectl get nodes`                          | Lists all nodes in the cluster.                                   |
+| `kubectl describe node node_name`            | Displays detailed information about a specific node.              |
+| `kubectl get node node_name -o json`         | Retrieves detailed information about a node in JSON format.       |
+| `kubectl delete node node_name`              | Deletes a specific node.                                          |
+| `kubectl drain node_name`                    | Evicts all pods from the node.                                    |
+| `kubectl cordon node_name`                   | Marks a node as unschedulable to prevent new pods from being assigned to it. |
+| `kubectl uncordon node_name`                 | Marks a node as schedulable to allow new pods to be assigned to it. |
+| `kubectl top node node_name`                 | Shows CPU and memory metrics for a node.                          |
+
 
 
 ## Resource and Probe Configuration in Kubernetes
