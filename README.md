@@ -19,12 +19,14 @@ kubectl delete -f file.yaml
 |----------------------------------------------|-------------------------------------------------------------------|
 | `kubectl get ns`                             | Lists all namespaces in the cluster.                              |
 | `kubectl get pods`                           | Lists all pods in the current namespace.                          |
-
+| Command                                      | Description                                                       |
+|----------------------------------------------|-------------------------------------------------------------------|
 | `kubectl get pod pod_name -o yaml`           | Retrieves detailed information about a pod in YAML format.        |
 | `kubectl describe pod pod_name`              | Displays detailed information about a specific pod.               |
 | `kubectl delete pod pod_name`                | Deletes a specific pod.                                           |
 | `kubectl exec -it pod_name -- sh`            | Opens an interactive shell session inside a running pod.          |
-
+| Command                                      | Description                                                       |
+|----------------------------------------------|-------------------------------------------------------------------|
 | `kubectl apply -f file.yaml`                 | Applies the configurations defined in the YAML file.              |
 | `kubectl delete -f file.yaml`                | Deletes the resources defined in the YAML file.                   |
 
