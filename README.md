@@ -52,7 +52,7 @@
 | Command                                      | Description                                                       |
 |----------------------------------------------|-------------------------------------------------------------------|
 | `kubectl get svc`                            | Lists all services in the current namespace.                      |
-| `kubectl describe svc service_name`          | Displays detailed information about a specific service.           |
+| `kubectl describe svc service_name`          | Show detailed information about a specific service, include IP addresses of pods associated.           |
 
 
 ### Nodes
@@ -175,3 +175,40 @@ These configurations ensure that the container has the necessary resources to fu
 11. **PersistentVolumeClaim (PVC)**
     - **Description:** A request for storage by a user, specifying size and access modes.
     - **Use Case:** Used to bind to a PersistentVolume and mount it to a pod.
+
+## Types of Kubernetes Services
+
+Kubernetes provides several types of services to manage network access to a set of Pods.
+
+### 1. ClusterIP
+
+**ClusterIP** is the default type of service in Kubernetes. It provides a stable internal IP address that allows communication between services **within** the cluster.
+
+- **Use Case**: Internal communication within the cluster.
+
+### Example
+  - Apply both manifests
+  - [Example clusterIp](./06-clusterIP.yaml) [Example bastion to test connectivity](./05-bastion.yaml)
+  - Opens interactive bash session in bastion pod
+    - `kubectl exec -it ubuntu -- bash`
+  - Install ping and curl in bastion pod
+    - `apt-get update -y`
+    - `apt-get install -y iputils-ping`
+    - `apt install curl`
+  - Test clusterIp service
+    - Execute
+      - `ping hello-svc`
+      - `curl http://hello-svc:8080`
+
+### 2. NodePort
+
+**NodePort** exposes the service on each node’s IP at a static port. A ClusterIP service, to which the NodePort service routes, is automatically created.
+
+- **Use Case**: Exposing a service to external traffic.
+
+### 3. LoadBalancer
+
+**LoadBalancer** creates an external load balancer (if supported by the cloud provider) and assigns a fixed external IP to the service.
+
+- **Use Case**: Exposing a service to the internet.
+
