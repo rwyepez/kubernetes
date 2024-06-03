@@ -48,11 +48,16 @@
 | `kubectl rollout undo deployment deployment_name`            | Reverts a deployment to a previous revision.                      |
 | `kubectl rollout undo deployment deployment_name --to-revision=revision_id` | Reverts a deployment to a specific revision, see revisions in history command.  |
 
+
 ### Services
 | Command                                      | Description                                                       |
 |----------------------------------------------|-------------------------------------------------------------------|
 | `kubectl get svc`                            | Lists all services in the current namespace.                      |
-| `kubectl describe svc service_name`          | Show detailed information about a specific service, include IP addresses of pods associated.           |
+| `kubectl describe svc service_name`          | Shows detailed information about a specific service, including IP addresses of pods associated. |
+| `kubectl expose pod pod_name --port=80 --target-port=8080` | Exposes a pod as a new service on a specified port.               |
+| `kubectl edit svc service_name`              | Live editing of a specific service.                               |
+| `kubectl delete svc service_name`            | Deletes a specific service.                                       |
+| `kubectl port-forward svc/service_name 8080:80` | Forwards a local port to a port on the service.                   |
 
 
 ### Nodes
@@ -68,7 +73,11 @@
 | `kubectl top node node_name`                 | Shows CPU and memory metrics for a node.                          |
 
 
-kubectl get ing
+### Ingress
+| Command                                      | Description                                                       |
+|----------------------------------------------|-------------------------------------------------------------------|
+| `kubectl get ing`                            | Lists all ingress resources in the current namespace.             |
+| `kubectl describe ing ingress_name`          | Shows detailed information about a specific ingress resource.     |
 
 
 ## Resource and Probe Configuration in Kubernetes
@@ -267,4 +276,8 @@ Kubernetes provides several types of services to manage network access to a set 
     ```bash
     curl http://loadBalancerDNSName/v1
     curl http://loadBalancerDNSName/v2
+    ```
+  - In case of any error with Ingress, check the logs from nginx pod
+    ```bash
+    kubectl logs -n ingress-nginx <ingress-nginx-pod-name>
     ```
