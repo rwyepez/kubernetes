@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-v1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      podLabel: lookme-v1
+  template:
+    metadata:
+      labels:
+        podLabel: lookme-v1
+    spec:
+      containers:
+      - name: container-v1
+        image: gcr.io/google-samples/hello-app:1.0
+        ports:
+        - containerPort: 8080
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-v2
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      podLabel: lookme-v2
+  template:
+    metadata:
+      labels:
+        podLabel: lookme-v2
+    spec:
+      containers:
+      - name: container-v2
+        image: gcr.io/google-samples/hello-app:2.0
+        ports:
+        - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-clusterip-v1
+spec:
+  ports:
+  - port: 8080
+    targetPort: 8080
+  selector:
+    podLabel: lookme-v1
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-clusterip-v2
+spec:
+  ports:
+  - port: 8080
+    targetPort: 8080
+  selector:
+    podLabel: lookme-v2

@@ -68,6 +68,8 @@
 | `kubectl top node node_name`                 | Shows CPU and memory metrics for a node.                          |
 
 
+kubectl get ing
+
 
 ## Resource and Probe Configuration in Kubernetes
 
@@ -243,3 +245,26 @@ Kubernetes provides several types of services to manage network access to a set 
     curl http://loadBalancerDNSName:8080
     ```
 
+## Ingress
+
+**Ingress** is not a type of service but an API object that manages external access to services within a cluster, typically HTTP. Ingress can provide load balancing, SSL termination, and name-based virtual hosting.
+
+- **Use Case**: Managing external access to services, typically HTTP and HTTPS, and providing features such as load balancing, SSL termination, and name-based virtual hosting.
+
+- **Example**
+  - Apply manifest:
+    - [Example backend](./09-nginx-services-backend.yaml)
+  - Install ingress-nginx controller, you can find the steps in complements folder [Install nginx](./complements_to_k8s/ingress-nginx/README.md)
+  - Apply ingress class, this is mandatory since Kubernetes 1.19 to specify what ingress controller use
+    - [Example ingress class](./10-nginx-ingress-class.yaml)
+  - Apply ingress nginx manifest
+    - [Example ingress nginx](./11-ingress-nginx.yaml)
+  - Verify if ingress is working, in ADDRES you should see the DNS name or public IP from load balancer created from nginx
+    ```bash
+    kubectl get ing
+    ```
+  - From your local computer, test the connectivity
+    ```bash
+    curl http://loadBalancerDNSName/v1
+    curl http://loadBalancerDNSName/v2
+    ```
