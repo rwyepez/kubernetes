@@ -187,18 +187,25 @@ Kubernetes provides several types of services to manage network access to a set 
 - **Use Case**: Internal communication within the cluster.
 
 ### Example
-  - Apply both manifests
-  - [Example clusterIp](./06-clusterIP.yaml) [Example bastion to test connectivity](./05-bastion.yaml)
+  - Apply both manifests:
+    - [Example clusterIp](./06-clusterIP.yaml)
+    - [Example bastion to test connectivity](./05-bastion.yaml)
   - Opens interactive bash session in bastion pod
-    - `kubectl exec -it ubuntu -- bash`
+    ```bash
+    kubectl exec -it ubuntu -- bash
+    ```
   - Install ping and curl in bastion pod
-    - `apt-get update -y`
-    - `apt-get install -y iputils-ping`
-    - `apt install curl`
+    ```bash
+    apt-get update -y
+    apt-get install -y iputils-ping
+    apt install curl
+    ```
   - Test clusterIp service
     - Execute
-      - `ping hello-svc`
-      - `curl http://hello-svc:8080`
+      ```bash
+      ping hello-svc
+      curl http://hello-svc:8080
+      ```
 
 ### 2. NodePort
 
