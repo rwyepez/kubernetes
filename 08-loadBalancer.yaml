@@ -6,11 +6,11 @@ spec:
   replicas: 2
   selector:
     matchLabels:
-      podLabel: lookmeNodePort
+      podLabel: lookmeloadbalancer
   template:
     metadata:
       labels:
-        podLabel: lookmeNodePort
+        podLabel: lookmeloadbalancer
     spec:
       containers:
       - name: hello-container
@@ -22,12 +22,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: svc-nodeport
+  name: svc-lb
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
-  - port: 8081  #Expose this port internally
-    targetPort: 8080  #Container port
-    nodePort: 30000   #Node port in each node to external access
+  - port: 8080
+    targetPort: 8080
   selector:
-    podLabel: lookmeNodePort
+    podLabel: lookmeloadbalancer

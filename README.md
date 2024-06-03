@@ -225,10 +225,21 @@ Kubernetes provides several types of services to manage network access to a set 
     curl http://nodePublicIP:30000
     ```
 
-
 ### 3. LoadBalancer
 
 **LoadBalancer** creates an external load balancer (if supported by the cloud provider) and assigns a fixed external IP to the service.
 
 - **Use Case**: Exposing a service to the internet.
+
+- **Example**
+  - Apply manifest:
+    - [Example loadBalancer](./08-loadBalancer.yaml)
+  - Get external DNS url from service load balancer 
+    ```bash
+    kubectl get svc
+    ```
+  - From your local computer, test the connectivity
+    ```bash
+    curl http://loadBalancerDNSName:8080
+    ```
 
