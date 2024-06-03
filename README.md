@@ -186,7 +186,7 @@ Kubernetes provides several types of services to manage network access to a set 
 
 - **Use Case**: Internal communication within the cluster.
 
-### Example
+- **Example**
   - Apply both manifests:
     - [Example clusterIp](./06-clusterIP.yaml)
     - [Example bastion to test connectivity](./05-bastion.yaml)
