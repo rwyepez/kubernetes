@@ -200,8 +200,7 @@ Kubernetes provides several types of services to manage network access to a set 
     apt-get install -y iputils-ping
     apt install curl
     ```
-  - Test clusterIp service
-    - Execute
+  - Test clusterIp service from bastion
       ```bash
       ping hello-svc
       curl http://hello-svc:8080
@@ -212,6 +211,20 @@ Kubernetes provides several types of services to manage network access to a set 
 **NodePort** exposes the service on each node’s IP at a static port. A ClusterIP service, to which the NodePort service routes, is automatically created.
 
 - **Use Case**: Exposing a service to external traffic.
+
+- **Example**
+  - Apply manifest:
+    - [Example nodePort](./07-nodePort.yaml)
+  - Open port **30000** in security group associated with your worker node
+  - Get publicIP from node to test the service 
+    ```bash
+    kubectl get nodes -o wide
+    ```
+  - From your local computer, test the connectivity
+    ```bash
+    curl http://nodePublicIP:30000
+    ```
+
 
 ### 3. LoadBalancer
 

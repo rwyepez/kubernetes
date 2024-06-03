@@ -6,11 +6,11 @@ spec:
   replicas: 2
   selector:
     matchLabels:
-      podLabel: holaClusterIp
+      podLabel: lookmeNodePort
   template:
     metadata:
       labels:
-        podLabel: holaClusterIp
+        podLabel: lookmeNodePort
     spec:
       containers:
       - name: hello-container
@@ -22,10 +22,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: hello-svc
+  name: svc-nodeport
 spec:
+  type: NodePort
   ports:
   - port: 8080
     targetPort: 8080
+    nodePort: 30000
   selector:
-    podLabel: holaClusterIp
+    podLabel: lookmeNodePort
